@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Acr.UserDialogs;
 using PlaceSearch.Models;
 using PlaceSearch.Services;
 using Xamarin.Essentials;
@@ -41,8 +42,23 @@ namespace PlaceSearch.ViewModels
 
         public async Task LoadLocationDetailsAsync(string placeId)
         {
-            var response = await _locationService.GetPlaceDetailsAsync(placeId);
-            LocationDetails = response;
+            try
+            {
+                UserDialogs.Instance.ShowLoading("Loading...");
+                var response = await _locationService.GetPlaceDetailsAsync(placeId);
+                LocationDetails = response;
+
+                
+            }
+            catch(Exception ex)
+            {
+                UserDialogs.Instance.Alert(ex?.Message, "An Error Occurred");
+            }
+            finally
+            {
+                UserDialogs.Instance.HideLoading();
+            }
+           
         }
         private async Task OpenUrl()
         {

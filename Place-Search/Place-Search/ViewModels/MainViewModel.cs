@@ -30,34 +30,46 @@ namespace PlaceSearch.ViewModels
                 OnPropertyChanged();
             }
         }
-        private bool _isLoading;
-        public bool IsLoading
-        {
-            get => _isLoading;
-            set
-            {
-                _isLoading = value;
-                OnPropertyChanged(nameof(IsLoading));
-            }
-        }
+       
 
         public Command SearchPlacesCommand { get; }
 
         public async Task SearchPlacesAsync()
         {
-            _isLoading = true;
-            if (string.IsNullOrWhiteSpace(SearchQuery))
-                return;
-
-            var response = await _locationService.SearchPlacesAsync(SearchQuery);
-
-            Places.Clear();
-            foreach (var place in response.Data)
+            try
             {
-                Places.Add(place);
+                UserDialogs.Instance.ShowLoading("Searching...");
+                Places.Clear(); // clear the list
+
+                if (string.IsNullOrWhiteSpace(SearchQuery))
+                {
+                    UserDialogs.Instance.Alert("Please enter search criteria.");
+                    return; // exit method if no search criteria
+                }
+
+                var response = await _locationService.SearchPlacesAsync(SearchQuery);
+                if (response.Data.Count == 0)
+                {
+                    UserDialogs.Instance.Alert("No places found matching your search criteria.");
+                }
+                else
+                {
+                    foreach (var place in response.Data)
+                    {
+                        Places.Add(place);
+                    }
+                }
             }
-           _isLoading = false;
+            catch (Exception ex)
+            {
+                UserDialogs.Instance.Alert(ex?.Message, "An Error Occurred");
+            }
+            finally
+            {
+                UserDialogs.Instance.HideLoading();
+            }
         }
+
     }
 }
 
