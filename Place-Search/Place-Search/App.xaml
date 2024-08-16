@@ -3,6 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Place_Search.App">
     <Application.Resources>
-
+         <ResourceDictionary>
+             <!--navigation-->
+             <Style TargetType="NavigationPage">
+                 <Setter Property="BarBackgroundColor" Value="#ec027e"/>
+                <Setter Property="BarTextColor" Value="#ffffff"/>
+            </Style>
+                <!--search bar-->
+                <Style x:Key="SearchEntryStyle" TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="Placeholder" Value="Enter place name"/>
+                <Setter Property="PlaceholderColor" Value="Gray"/>
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="Margin" Value="0,0,0,10"/>
+            </Style>
+                <!--button-->
+   
+            <Style x:Key="SearchButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#ec027e"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="Margin" Value="0,10,0,10"/>
+            </Style>
+    </ResourceDictionary>
     </Application.Resources>
 </Application>
