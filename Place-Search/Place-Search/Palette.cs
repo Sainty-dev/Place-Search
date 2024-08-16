@@ -5,7 +5,7 @@ namespace PlaceSearch
 {
 	public class Palette
 	{
-        public static readonly Color PrimaryColor = Color.FromHex("#ec027e");
-    }
+            public static readonly Color PrimaryColor = Color.FromHex("#ec027e");
+        }
 }
 
