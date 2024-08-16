@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+    <ContentPage
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:vm="clr-namespace:PlaceSearch.ViewModels"
+        xmlns:local="clr-namespace:PlaceSearch.Converters"
+        BackgroundColor="#ffffff"
+        Title="Places"
+        x:Class="PlaceSearch.Views.MainPage">
+   
+    
+        <ContentPage.Content>
+          
+            <Grid>
+                <!-- Background Image -->
+                <Image Source="placeholder.png"
+                       Aspect="AspectFit"
+                       Grid.RowSpan="2" />
+
+                <!-- Dim Overlay -->
+                <BoxView Color="Black"
+                         Opacity="0.5"
+                         Grid.RowSpan="2" />
+
+                <!-- Content -->
+          
+                    <StackLayout Grid.RowSpan="2" Padding="10" >
+                        <Frame CornerRadius="10" HasShadow="True" BorderColor="LightGray" Padding="0" VerticalOptions="Center">
+                            <Entry Text="{Binding SearchQuery}" Style="{StaticResource SearchEntryStyle}" Placeholder="Enter place name" />
+                        </Frame>
+
+                        <Button Text="Search" Command="{Binding SearchPlacesCommand}" Style="{StaticResource SearchButtonStyle}" />
+                        <ScrollView VerticalOptions="FillAndExpand">
+                        <Grid>
+                            <CollectionView ItemsSource="{Binding Places}" SelectionMode="Single" SelectionChanged="OnPlaceSelected">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                                </CollectionView.ItemsLayout>
+
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame Padding="10" Margin="5" CornerRadius="10" HasShadow="True" BorderColor="LightGray">
+                                            <Grid ColumnDefinitions="*" VerticalOptions="Center">
+                                                <Image HorizontalOptions="Start" Source="item.jpg" HeightRequest="54" WidthRequest="54" Margin="0,0,10,0" />
+
+                                                <StackLayout WidthRequest="250" HorizontalOptions="Center">
+                                                    <Label Text="{Binding MainText}" FontAttributes="Bold" FontSize="16" />
+                                                    <Label Text="{Binding SecondaryText}" FontSize="14" TextColor="Gray" />
+                                                </StackLayout>
+
+                                                <Image Source="arrow.png" HeightRequest="8" WidthRequest="24" HorizontalOptions="End" />
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                             </ScrollView>
+                    </StackLayout>
+           
+            </Grid>
+            
+        </ContentPage.Content>
+    </ContentPage>
