@@ -7,8 +7,8 @@ namespace PlaceSearch.Services
 {
 	public interface ILocationService
 	{
-        Task<IEnumerable<Place>> SearchPlacesAsync(string query);
-        Task<LocationDetails> GetLocationDetailsAsync(string placeId);
+        Task<PlaceSearchResponse> SearchPlacesAsync(string query);
+        Task<LocationDetailsResponse> GetPlaceDetailsAsync(string placeId);
     }
 }
 

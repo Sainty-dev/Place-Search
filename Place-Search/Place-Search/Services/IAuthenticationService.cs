@@ -5,7 +5,7 @@ namespace PlaceSearch.Services
 {
 	public interface IAuthenticationService
 	{
-        Task<string> GetTokenAsync();
+        Task<string> GetAccessTokenAsync();
     }
 }
 
